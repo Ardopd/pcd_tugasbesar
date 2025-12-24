@@ -8,7 +8,29 @@ import requests
 from io import BytesIO
 
 
+import os
+from tensorflow.keras.layers import Dense, Flatten
+from tensorflow.keras.models import Model
+from tensorflow.keras.applications.vgg16 import VGG16
 
+# 1. Rapikan Folder
+!mkdir -p /content/dataset_birds
+!mv /content/train /content/dataset_birds/ 2>/dev/null
+train_path = '/content/dataset_birds/train'
+num_classes = len([f for f in os.listdir(train_path) if os.path.isdir(os.path.join(train_path, f))])
+print(f"Berhasil mendeteksi {num_classes} jenis burung.")
+
+# 2. Bangun Ulang Model dengan jumlah kelas yang BENAR
+vgg = VGG16(input_shape=[224, 224, 3], weights='imagenet', include_top=False)
+for layer in vgg.layers:
+    layer.trainable = False
+x = Flatten()(vgg.output)
+prediction = Dense(num_classes, activation='softmax')(x) # num_classes harus sesuai folder
+model = Model(inputs=vgg.input, outputs=prediction)
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+# 3. Jalankan Training (Gunakan .fit, bukan .fit_generator)
+r = model.fit(training_set, validation_data=test_set, epochs=5)
 # Tempat penyimpanan sementara
 output = "Model/BC.h5"
 
