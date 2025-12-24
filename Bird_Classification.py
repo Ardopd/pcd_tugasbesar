@@ -12,7 +12,7 @@ from io import BytesIO
 # Tempat penyimpanan sementara
 output = "Model/BC.h5"
 
-import gdown # Tambahkan import tepat sebelum digunakan
+import gdown 
 gdown.download(url, output, quiet=False)
 
 # Load model setelah diunduh
