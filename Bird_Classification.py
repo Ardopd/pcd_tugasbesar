@@ -92,7 +92,6 @@ def run():
 
     st.title(":bird: Klasifikasi Spesies Burung")
     st.subheader("Kelompok Pert15 - Digital Image Processing")
-     st.subheader("Ardo Pakusadewo-Faisal")
     option = st.radio("Pilih sumber gambar:", ("Unggah Gambar", "Gunakan URL"))
     img_file = None
     img_url = ""
