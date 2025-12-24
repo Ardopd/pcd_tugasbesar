@@ -14,7 +14,6 @@ output = "Model/BC.h5"
 
 # Unduh model dari Google Drive
 gdown.download(url, output, quiet=False)
-
 # Load model setelah diunduh
 model = load_model(output, compile=False)
 
