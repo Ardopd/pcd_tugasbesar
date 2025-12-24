@@ -1,12 +1,7 @@
 numpy
-
 Pillow
-
 streamlit
-
 Keras
-
 tensorflow
-
 requests
 gdown
